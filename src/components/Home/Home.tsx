@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Home.css';
+import PasswordBox from '../PasswordBox/PasswordBox';
 
 
 const Home: React.FunctionComponent = () => {
@@ -8,18 +9,10 @@ const Home: React.FunctionComponent = () => {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(false);
 
-  const inputOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(event.target.value);
-    const rulesResult = rules.every((rule) => {
-      return rule.test(event.target.value);
-    })
-    setIsValid(rulesResult);
-  }
-
   return (
     <div>
       <div>
-        <input data-testid="password-input" type="text" onChange={inputOnChange} />
+        <PasswordBox rules={rules} setValue={setValue} setIsValid={setIsValid}/>
         <span data-testid="password-length">
           {value.length}
         </span>
