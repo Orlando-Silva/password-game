@@ -4,12 +4,16 @@ import './Home.css';
 
 const Home: React.FunctionComponent = () => {
 
+  const rules = [/.{5,}/];
   const [value, setValue] = useState('');
-  const [hasFiveCharacters, setHasFiveCharacters] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const inputOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(event.target.value);
-    setHasFiveCharacters(/.{5,}/.test(event.target.value));  
+    const rulesResult = rules.every((rule) => {
+      return rule.test(event.target.value);
+    })
+    setIsValid(rulesResult);
   }
 
   return (
@@ -20,8 +24,8 @@ const Home: React.FunctionComponent = () => {
           {value.length}
         </span>
       </div>
-      <div data-testid="five-characters-rule">
-        { hasFiveCharacters ? 'C' : 'X' } Digite um password com 5 caracteres.
+      <div data-testid="is-valid-rules">
+        { isValid ? 'C' : 'X' }
       </div>
     </div>
   );
