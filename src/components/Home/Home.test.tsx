@@ -24,28 +24,28 @@ describe('Home component tests', () => {
     expect(passwordLengthSpan).toHaveTextContent(`${password.length}`);
   });
 
-  test('It matches 5 character rule', () => {
+  test('It matches all rules', () => {
     const password = 'test-password';
 
     const { getByTestId } = render(<Home/>);
     const passwordInput = getByTestId('password-input');
     fireEvent.change(passwordInput,  { target: { value: password } });
 
-    const rule = getByTestId('five-characters-rule');
+    const rule = getByTestId('is-valid-rules');
 
-    expect(rule).toHaveTextContent('C Digite um password com 5 caracteres.');
+    expect(rule).toHaveTextContent('C');
   });
 
-  test("It shouldn't matches 5 character rule", () => {
+  test("It shouldn't matches all rules", () => {
     const password = 'test';
 
     const { getByTestId } = render(<Home/>);
     const passwordInput = getByTestId('password-input');
     fireEvent.change(passwordInput,  { target: { value: password } });
 
-    const rule = getByTestId('five-characters-rule');
+    const rule = getByTestId('is-valid-rules');
 
-    expect(rule).toHaveTextContent('X Digite um password com 5 caracteres.');
+    expect(rule).toHaveTextContent('X');
   });
 
 });
