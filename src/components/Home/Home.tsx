@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Home.css';
 import PasswordBox from '../PasswordBox/PasswordBox';
+import ValueLength from '../ValueLength/ValueLength';
 
 
 const Home: React.FunctionComponent = () => {
@@ -13,9 +14,7 @@ const Home: React.FunctionComponent = () => {
     <div>
       <div>
         <PasswordBox rules={rules} setValue={setValue} setIsValid={setIsValid}/>
-        <span data-testid="password-length">
-          {value.length}
-        </span>
+        <ValueLength value={value}/>
       </div>
       <div data-testid="is-valid-rules">
         { isValid ? 'C' : 'X' }
