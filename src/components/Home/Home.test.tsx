@@ -31,7 +31,7 @@ describe('Home component tests', () => {
     const passwordInput = getByTestId('password-input');
     fireEvent.change(passwordInput,  { target: { value: password } });
 
-    const rule = getByTestId('is-valid-rules');
+    const rule = getByTestId('is-valid-rules-0');
 
     expect(rule).toHaveTextContent('C');
   });
@@ -43,7 +43,7 @@ describe('Home component tests', () => {
     const passwordInput = getByTestId('password-input');
     fireEvent.change(passwordInput,  { target: { value: password } });
 
-    const rule = getByTestId('is-valid-rules');
+    const rule = getByTestId('is-valid-rules-0');
 
     expect(rule).toHaveTextContent('X');
   });
