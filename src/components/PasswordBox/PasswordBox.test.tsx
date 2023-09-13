@@ -3,17 +3,24 @@ import { render, fireEvent } from '@testing-library/react';
 import PasswordBox from './PasswordBox';
 
 describe('PasswordBox component tests', () => {
+
+  const rules = [
+    { 
+      expression: /.{5,}/,
+      description: 'Must have five characters'
+    }
+  ];
   
   test('It matches all rules', () => {
     const password = 'test-password';
 
     const setValue = jest.fn();
     const setIsValid = jest.fn();
-    const { getByTestId } = render(<PasswordBox rules={[/.{5,}/]} setValue={setValue} setIsValid={setIsValid}/>);
+    const { getByTestId } = render(<PasswordBox rules={rules} setValue={setValue} setIsValid={setIsValid}/>);
     const passwordInput = getByTestId('password-input');
     fireEvent.change(passwordInput,  { target: { value: password } });
 
-    expect(setIsValid).toBeCalledWith(true);
+    expect(setIsValid).toBeCalledWith([true]);
   });
 
   test("It shouldn't matches all rules", () => {
@@ -21,11 +28,11 @@ describe('PasswordBox component tests', () => {
 
     const setValue = jest.fn();
     const setIsValid = jest.fn();
-    const { getByTestId } = render(<PasswordBox rules={[/.{5,}/]} setValue={setValue} setIsValid={setIsValid}/>);
+    const { getByTestId } = render(<PasswordBox rules={rules} setValue={setValue} setIsValid={setIsValid}/>);
     const passwordInput = getByTestId('password-input');
     fireEvent.change(passwordInput,  { target: { value: password } });
 
-    expect(setIsValid).toBeCalledWith(false);
+    expect(setIsValid).toBeCalledWith([false]);
   });
 
   test("It should call setValue", () => {
@@ -33,7 +40,7 @@ describe('PasswordBox component tests', () => {
 
     const setValue = jest.fn();
     const setIsValid = jest.fn();
-    const { getByTestId } = render(<PasswordBox rules={[/.{5,}/]} setValue={setValue} setIsValid={setIsValid}/>);
+    const { getByTestId } = render(<PasswordBox rules={rules} setValue={setValue} setIsValid={setIsValid}/>);
     const passwordInput = getByTestId('password-input');
     fireEvent.change(passwordInput,  { target: { value: password } });
 
