@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Home.css';
 import PasswordBox from '../PasswordBox/PasswordBox';
 import ValueLength from '../ValueLength/ValueLength';
+import ValidRule from '../ValidRule/ValidRule';
 import { getRules } from '../../services/RuleService';
 
 const Home: React.FunctionComponent = () => {
@@ -16,16 +17,8 @@ const Home: React.FunctionComponent = () => {
       <div>
         <PasswordBox rules={rules} setValue={setValue} setIsValid={setIsValid}/>
         <ValueLength value={value}/>
+        <ValidRule value={isValid}/>
       </div>
-      {
-        rules.map((r, index) => {
-          return (
-          <div key={`is-valid-rules-${index}`} data-testid={`is-valid-rules-${index}`}>
-            { `Rule #${ index + 1}: ${r.description} - ${ isValid[index] ? 'C' : 'X' }` }
-          </div>
-          )
-        })
-      }
     </div>
   );
 };
