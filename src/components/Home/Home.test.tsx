@@ -44,6 +44,54 @@ describe('Home component tests', () => {
     fireEvent.change(passwordInput,  { target: { value: password } });
 
     const rule = getByTestId('is-valid-rules-0');
+    
+    expect(rule).toHaveTextContent('X');
+  });
+
+  test('It matches only with "Must have five characters" rule', () => {
+    const password = 'test-password';
+
+    const { getByTestId } = render(<Home/>);
+    const passwordInput = getByTestId('password-input');
+    fireEvent.change(passwordInput,  { target: { value: password } });
+
+    const rule = getByTestId('is-valid-rules-0');
+
+    expect(rule).toHaveTextContent('C');
+  });
+
+  test('It should not match the "Must have five characters" rule', () => {
+    const password = 'test';
+
+    const { getByTestId } = render(<Home/>);
+    const passwordInput = getByTestId('password-input');
+    fireEvent.change(passwordInput,  { target: { value: password } });
+
+    const rule = getByTestId('is-valid-rules-0');
+
+    expect(rule).toHaveTextContent('X');
+  });
+
+  test('It matches only with "Must include a digit" rule', () => {
+    const password = '1';
+
+    const { getByTestId } = render(<Home/>);
+    const passwordInput = getByTestId('password-input');
+    fireEvent.change(passwordInput,  { target: { value: password } });
+
+    const rule = getByTestId('is-valid-rules-1');
+
+    expect(rule).toHaveTextContent('C');
+  });
+
+  test('It should not match the "Must include a digit" rule', () => {
+    const password = 'test';
+
+    const { getByTestId } = render(<Home/>);
+    const passwordInput = getByTestId('password-input');
+    fireEvent.change(passwordInput,  { target: { value: password } });                
+
+    const rule = getByTestId('is-valid-rules-1');
 
     expect(rule).toHaveTextContent('X');
   });
